@@ -1,2 +1,2 @@
-# Greenwood-forest-management
+# Greenwood
 Forest management system to alarm authorities of logging, poaching and track wild elephant movement.
