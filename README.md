@@ -1,16 +1,6 @@
 # Greenwood
 Forest management system to alarm authorities of logging, poaching and track wild elephant movement.
 
-## How to Contribute (Backend)
-Create mariadb_database image and start container
-```
-docker run --name greenwood_mariadb -e MYSQL_ROOT_PASSWORD=pass -p 3308:3308 -d docker.io/library/mariadb:10.10
-```
-Connect to greenwood_mariadb container via TTY
-```
-docker exec -it greenwood_mariadb bash
-```
-
 ## Literature 
 //abstract// </br>
 Read the full report [here](https://safaa.dev/greenwood_paper)
