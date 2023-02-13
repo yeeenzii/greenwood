@@ -1,94 +1,97 @@
-# import oracledb
-# from env_vars import env_dict
-#
-# def database_helper():
-#     connection = oracledb.connect(
-#         user="ADMIN",
-#         password="1Vr%125lBlhf",
-#         dsn="(description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-singapore-1.oraclecloud.com))(connect_data=(service_name=g6c4c0c6d559479_greenwood_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))")  # the connection string copied from the cloud console
-#
-#     print("Successfully connected to Oracle Database")
-#
-#
-# if __name__ == "__main__":
-#     database_helper()
-#
-# #
-# # #"0Fm*56sWpSTO"
-# # #l04C5a%m%DWO
-# # #adb.ap-singapore-1.oraclecloud.com/g6c4c0c6d559479_greenwood_high.adb.oraclecloud.com
-# #
-# # import getpass
-# #
-# # # pw = getpass.getpass("Enter password: ")
-# #
-# #
-# # # Create a table
-# # with connection.cursor() as cursor:
-# #
-# #     cursor.execute("""
-# #         begin
-# #             execute immediate 'drop table todoitem';
-# #             exception when others then if sqlcode <> -942 then raise; end if;
-# #         end;""")
-# #
-# #     cursor.execute("""
-# #         create table todoitem (
-# #             id number generated always as identity,
-# #             description varchar2(4000),
-# #             creation_ts timestamp with time zone default current_timestamp,
-# #             done number(1,0),
-# #             primary key (id))""")
-# #
-# #     print("Table created")
-# #
-# # # Insert some data
-# # with connection.cursor() as cursor:
-# #
-# #     rows = [ ("Task 1", 0 ),
-# #              ("Task 2", 0 ),
-# #              ("Task 3", 1 ),
-# #              ("Task 4", 0 ),
-# #              ("Task 5", 1 ) ]
-# #
-# #     cursor.executemany("insert into todoitem (description, done) values(:1, :2)", rows)
-# #     print(cursor.rowcount, "Rows Inserted")
-# #
-# # connection.commit()
-# #
-# # # Now query the rows back
-# # with connection.cursor() as cursor:
-# #
-# #     for row in cursor.execute('select description, done from todoitem'):
-# #         if (row[1]):
-# #             print(row[0], "is done")
-# #         else:
-# #             print(row[0], "is NOT done")
-
-
 """
-Greenwood
+Database Helper
 _________
-Main launcher for greenwood forest management system
-This is a module which has a class for database to handle operations
+This module has a class for database to handle operations
 """
-
+#        :param connection_string: str
+import oracledb
+from env_vars import env_dict
 
 class Database(object):
 
-    """Database Class which is responsible for connecting to database"""
+    """Database Class which is responsible for managing connections and queries to the database"""
 
-    def __init__(self, connection_string):
+    def __init__(self):
         """
-        This is a connection string to connect to oracle sql server
-        :param connection_string: str
+        Initalizes the database connection
         """
-        self.connection_string = connection_string
 
-    def connect(self) -> True:
+        self.connection = None
+        if self.__connect():  #TODO manage failure
+            print("Connected to database")
+        else:
+            print("Could not connect to database")
+        #Initialize database schema if database it does not exist
+        #connection.
+
+    def __connect(self) -> True:
         """
         This method is used to connect to database
         :return: bool
         """
-        print("connected to database")
+        connection = oracledb.connect(
+            user=env_dict['DB_USER'],
+            password=env_dict['DB_PASSWORD'],
+            dsn=env_dict['DB_CONNECTION_STRING'])
+        self.connection = connection;
         return True
+
+    def query(self, query):
+        with self.connection.cursor() as cursor:
+            cursor.execute(query)
+        pass
+    def create_organization(self):
+        pass
+    def invite_user(self):
+        pass
+    def create_user(self):
+        pass
+    def remove_user(self):
+        pass
+    def add_activity_record(self):
+        pass
+
+# # Create a table
+# with connection.cursor() as cursor:
+#
+#     cursor.execute("""
+#         begin
+#             execute immediate 'drop table todoitem';
+#             exception when others then if sqlcode <> -942 then raise; end if;
+#         end;""")
+#
+#     cursor.execute("""
+#         create table todoitem (
+#             id number generated always as identity,
+#             description varchar2(4000),
+#             creation_ts timestamp with time zone default current_timestamp,
+#             done number(1,0),
+#             primary key (id))""")
+#
+#     print("Table created")
+#
+# # Insert some data
+# with connection.cursor() as cursor:
+#
+#     rows = [ ("Task 1", 0 ),
+#              ("Task 2", 0 ),
+#              ("Task 3", 1 ),
+#              ("Task 4", 0 ),
+#              ("Task 5", 1 ) ]
+#
+#     cursor.executemany("insert into todoitem (description, done) values(:1, :2)", rows)
+#     print(cursor.rowcount, "Rows Inserted")
+#
+# connection.commit()
+#
+# # Now query the rows back
+# with connection.cursor() as cursor:
+#
+#     for row in cursor.execute('select description, done from todoitem'):
+#         if (row[1]):
+#             print(row[0], "is done")
+#         else:
+#             print(row[0], "is NOT done")
+
+database = Database();
+database.query("SHOW DATABASES;")
