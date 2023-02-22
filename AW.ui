@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="value">
-     <number>24</number>
+     <number>0</number>
     </property>
    </widget>
    <widget class="QPushButton" name="DownloadReport">
@@ -523,7 +523,7 @@
      <string notr="true">background-color: rgb(126, 126, 126)</string>
     </property>
     <property name="text">
-     <string>...</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="DateLabel2">
@@ -539,7 +539,7 @@
      <string notr="true">background-color: rgb(126, 126, 126)</string>
     </property>
     <property name="text">
-     <string>...</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="ElephantsLabel">
@@ -617,7 +617,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>...</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="HumanLabel2">
@@ -630,7 +630,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>...</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="LoggingLabel2">
@@ -643,7 +643,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>...</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="GunshotLabel2">
@@ -656,7 +656,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>...</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="CycleLabel2">
@@ -669,7 +669,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>...</string>
+     <string/>
     </property>
    </widget>
   </widget>
